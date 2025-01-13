@@ -61,6 +61,31 @@
   camera 
   look-controls="pointerLockEnabled: true; reverseMouseDrag: false;"
 ></a-entity>
+    <script>
+    // Switch Camera
+    function switchCamera() {
+      const scene = document.querySelector('a-scene');
+      const arSystem = scene.systems['arjs'];
+      const currentSource = arSystem.data.source;
+
+      // Toggle between front and rear camera
+      const newSource = currentSource === 'environment' ? 'user' : 'environment';
+
+      // Reinitialize AR.js with the new source
+      arSystem.el.setAttribute('arjs', `source: ${newSource}; sourceType: webcam; debugUIEnabled: false;`);
+    }
+
+    // Zoom Camera
+    function zoomCamera(zoomIn) {
+      const camera = document.querySelector('a-entity[camera]').getObject3D('camera');
+      if (zoomIn) {
+        camera.zoom = Math.min(camera.zoom + 0.1, 2); // Maximum zoom level
+      } else {
+        camera.zoom = Math.max(camera.zoom - 0.1, 1); // Minimum zoom level
+      }
+      camera.updateProjectionMatrix(); // Update the camera's projection matrix
+    }
+  </script>
   </a-scene>
 </body>
 </html>
