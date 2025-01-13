@@ -59,37 +59,5 @@
     <!-- Camera with Custom Movement -->
     <a-entity camera id="mainCamera"></a-entity>
      </a-scene>
-  <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
-    <button onclick="switchCamera()">Switch Camera</button>
-  </div>
-  <div style="position: absolute; bottom: 10px; right: 10px; z-index: 1000;">
-    <button onclick="zoomCamera(true)">Zoom In</button>
-    <button onclick="zoomCamera(false)">Zoom Out</button>
-  </div>
-    <script>
-    // Switch Camera
-    function switchCamera() {
-      const scene = document.querySelector('a-scene');
-      const arSystem = scene.systems['arjs'];
-      const currentSource = arSystem.data.source;
-
-      // Toggle between front and rear camera
-      const newSource = currentSource === 'environment' ? 'user' : 'environment';
-
-      // Reinitialize AR.js with the new source
-      arSystem.el.setAttribute('arjs', `source: ${newSource}; sourceType: webcam; debugUIEnabled: false;`);
-    }
-
-    // Zoom Camera
-    function zoomCamera(zoomIn) {
-      const camera = document.querySelector('a-entity[camera]').getObject3D('camera');
-      if (zoomIn) {
-        camera.zoom = Math.min(camera.zoom + 0.1, 2); // Maximum zoom level
-      } else {
-        camera.zoom = Math.max(camera.zoom - 0.1, 1); // Minimum zoom level
-      }
-      camera.updateProjectionMatrix(); // Update the camera's projection matrix
-    }
-  </script>
 </body>
 </html>
