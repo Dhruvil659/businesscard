@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR.js Image Tracking</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
   <!-- AR.js Scene -->
@@ -16,38 +14,46 @@
     embedded
     arjs="sourceType: webcam; debugUIEnabled: false;"
   >
-    <!-- Image Marker -->
+    <!-- Image Marker with Smoothing -->
     <a-marker
       preset="custom"
       type="pattern"
       url="pattern-qr1.patt"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance="0.01"
+      smoothThreshold="5"
     >
       <!-- AR Content -->
       <a-entity
-  gltf-model="businesscard1.glb"
-  scale="0.5 0.5 0.5"
-  position="0 0 0"
-></a-entity>
-<a-text
-  value="Hello AR!"
-  color="blue"
-  position="0 0.5 0"
-></a-text>
+        gltf-model="businesscard1.glb"
+        scale="0.5 0.5 0.5"
+        position="0 0 0"
+      ></a-entity>
+      <a-text
+        value="Hello AR!"
+        color="blue"
+        position="0 0.5 0"
+      ></a-text>
     </a-marker>
-    <script>
-  AFRAME.registerComponent('custom-move', {
-    init: function () {
-      document.addEventListener('keydown', (e) => {
-        const camera = this.el.object3D;
-        if (e.key === 'ArrowUp') camera.position.z -= 0.1;
-        if (e.key === 'ArrowDown') camera.position.z += 0.1;
-        if (e.key === 'ArrowLeft') camera.position.x -= 0.1;
-        if (e.key === 'ArrowRight') camera.position.x += 0.1;
-      });
-    }
-  });
-</script>
-<a-entity camera custom-move></a-entity>
+
+    <!-- Camera with Custom Movement -->
+    <a-entity camera custom-move></a-entity>
   </a-scene>
+
+  <!-- Custom Camera Movement Script -->
+  <script>
+    AFRAME.registerComponent('custom-move', {
+      init: function () {
+        document.addEventListener('keydown', (e) => {
+          const camera = this.el.object3D.position;
+          if (e.key === 'ArrowUp') camera.z -= 0.1;   // Move forward
+          if (e.key === 'ArrowDown') camera.z += 0.1; // Move backward
+          if (e.key === 'ArrowLeft') camera.x -= 0.1; // Move left
+          if (e.key === 'ArrowRight') camera.x += 0.1; // Move right
+        });
+      }
+    });
+  </script>
 </body>
 </html>
