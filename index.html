@@ -61,6 +61,14 @@
   camera 
   look-controls="pointerLockEnabled: true; reverseMouseDrag: false;"
 ></a-entity>
+     </a-scene>
+  <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
+    <button onclick="switchCamera()">Switch Camera</button>
+  </div>
+  <div style="position: absolute; bottom: 10px; right: 10px; z-index: 1000;">
+    <button onclick="zoomCamera(true)">Zoom In</button>
+    <button onclick="zoomCamera(false)">Zoom Out</button>
+  </div>
     <script>
     // Switch Camera
     function switchCamera() {
@@ -86,6 +94,5 @@
       camera.updateProjectionMatrix(); // Update the camera's projection matrix
     }
   </script>
-  </a-scene>
 </body>
 </html>
