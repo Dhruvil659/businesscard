@@ -57,22 +57,10 @@
     </a-marker>
 
     <!-- Camera with Custom Movement -->
-    <a-entity camera custom-move></a-entity>
+    <a-entity 
+  camera 
+  look-controls="pointerLockEnabled: true; reverseMouseDrag: false;"
+></a-entity>
   </a-scene>
-
-  <!-- Custom Camera Movement Script -->
-  <script>
-    AFRAME.registerComponent('custom-move', {
-      init: function () {
-        document.addEventListener('keydown', (e) => {
-          const camera = this.el.object3D.position;
-          if (e.key === 'ArrowUp') camera.z -= 0.1;   // Move forward
-          if (e.key === 'ArrowDown') camera.z += 0.1; // Move backward
-          if (e.key === 'ArrowLeft') camera.x -= 0.1; // Move left
-          if (e.key === 'ArrowRight') camera.x += 0.1; // Move right
-        });
-      }
-    });
-  </script>
 </body>
 </html>
