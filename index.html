@@ -15,7 +15,7 @@
     vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
             renderer="logarithmicDepthBuffer: true;"
-            arjs="trackingMethod: best; sourceType: webcam;source: environment;debugUIEnabled: false;"
+            arjs="trackingMethod: best; sourceType: webcam; source: environment; debugUIEnabled: false;"
             id="scene"
             embedded
             gesture-detector
@@ -57,10 +57,7 @@
     </a-marker>
 
     <!-- Camera with Custom Movement -->
-    <a-entity 
-  camera 
-  look-controls="pointerLockEnabled: true; reverseMouseDrag: false;"
-></a-entity>
+    <a-entity camera id="mainCamera"></a-entity>
      </a-scene>
   <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
     <button onclick="switchCamera()">Switch Camera</button>
